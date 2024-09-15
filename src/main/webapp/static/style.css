@@ -1,0 +1,90 @@
+html, body{
+    height: 100%;
+}
+
+section {
+    height: 73%;
+    background-color: #1f445a;
+    color: white;
+    overflow: auto;
+}
+
+.sidenav {
+    background-color: #27404c;
+    overflow: auto;
+}
+
+.nav-link {
+    color: white;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    height:5%;
+    padding: 15px;
+    text-align: center;
+    background-color: #242829;
+    color: white;
+}
+
+header {
+    background-color: #17374a;
+    height: 30%;
+    overflow: hidden;
+    color: white;
+}
+
+.imagerow {
+    padding: 15px;
+    width: 70%;
+    margin: auto;
+}
+
+.imagecol {
+    width: 20%;
+}
+
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+  	font-size: 15px;
+}
+
+.rating-input {
+    width: 15%
+}
+
+.app-details-image {
+    margin-top:5%
+}
+
+.app-details-desc {
+    margin-top:5%
+}
+
+.new-app-btn-save {
+    margin-left: 45%;
+    width: 25%;
+}
+
+.new-app-btn-cancel {
+    float: right;
+    width: 25%;
+}
+
+.app-category-header{
+    margin-top: 1%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.login-row{
+    height: 90%;
+}
+
+.app-details-link {
+    color: white;
+    font-size: 20px;
+}}

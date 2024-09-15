@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+    <header id="header" th:fragment="header" class="row">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand main-nav navbar-dark">
+                <div class="mx-auto" sec:authorize="!isAuthenticated()">
+                    <a class="navbar-brand mx-0" th:href="@{/login}">Login</a>
+                </div>
+                <div class="mx-auto" sec:authorize="isAuthenticated()">
+                    <span sec:authentication="name"></span>
+                    <a class="navbar-brand col-md-6" th:href="@{/perform_logout}">Logout</a>
+                </div>
+                <div class="position-absolute">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="navbar-brand" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" sec:authorize="hasAuthority('DEVELOPER')"
+                               th:href="@{/newapp}">New</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="row imagerow">
+                <div th:each="logo : ${topLogos}" class="imagecol">
+                    <img class="rounded mx-auto d-block"
+                         th:src="${logo} == null ? _ : @{'data:image/jpg;base64,'+${logo}}">
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+</html>

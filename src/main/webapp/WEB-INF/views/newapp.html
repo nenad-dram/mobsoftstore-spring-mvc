@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="/fragments/layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title>New Application</title>
+</head>
+
+<body>
+
+    <section class="row">
+        <main class="login-form">
+            <div class="alert alert-danger text-center" role="alert" th:if="${message}">
+                <span th:text="${message}"></span>
+            </div>
+            <form th:action="@{/addnewapp}" th:object="${app}" method="post" enctype="multipart/form-data" class="">
+                <h2 class="text-center">New application</h2>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input id="name" class="form-control" type="text" name="name"
+                           th:field="*{name}"
+                           onkeyup="newAppValidate()" required>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" class="form-control" name="category" th:field="*{category}"
+                            onchange="newAppValidate()">
+                        <option value="" selected>Select category</option>
+                        <option th:each="category : ${categories}" th:value="${category}"
+                                th:text="${#strings.capitalize(category)}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" class="form-control"
+                              name="description" rows="4"
+                              cols="50" th:field="*{description}"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="archive" class="form-label">Archive</label>
+                    <input type="file" name="archive" id="archive" onchange="newAppValidate()" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <input id="submit" type="submit" value="Save" class="btn btn-primary new-app-btn-save" disabled>
+                    <button type="button" onclick="window.history.back();" class="btn btn-secondary new-app-btn-cancel">
+                        Cancel
+                    </button>
+                </div>
+
+            </form>
+        </main>
+    </section>
+
+</body>
+</html>

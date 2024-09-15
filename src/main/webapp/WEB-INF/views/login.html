@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="/fragments/layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+
+    <section class="row login-row">
+        <main class="login-form">
+            <div class="alert alert-danger text-center" role="alert" th:if="${param.error}">
+                <span>Wrong username or password!</span>
+            </div>
+            <form th:action="@{/perform_login}" method="post">
+                <h2 class="text-center">Log in</h2>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary mt-2 w-100">Log in</button>
+                </div>
+            </form>
+        </main>
+    </section>
+
+</body>
+</html>

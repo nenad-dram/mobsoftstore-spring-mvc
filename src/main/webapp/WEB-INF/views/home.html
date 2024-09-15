@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="/fragments/layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title>Mobile Software Store</title>
+</head>
+
+<body>
+    <section class="row">
+        <nav class="col-md-2 sidenav">
+            <ul class="nav flex-column">
+                <li class="nav-item" th:each="category : ${categories}">
+                    <a class="nav-link" th:href="@{|/applications/${category}|}"
+                       th:text="${#strings.capitalize(category)}"></a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="col-md-10">
+            <div class="app-category-header" th:if="${category}">
+                <span th:text="${#strings.capitalize(category)  + ' Applications'}"> </span>
+            </div>
+            <div th:each="app : ${appList}">
+                <hr>
+                <div class="row">
+                    <div class="col-md-2">
+                        <img class="rounded d-block mx-auto"
+                             th:src="${app.pictureSmall} == null ? _ : @{'data:image/jpg;base64,'+${app.pictureSmall}}">
+                    </div>
+                    <div class="col-md-2">
+                        <a th:href="@{|/details/${app.id}|}"
+                           th:text="${app.name}" class="app-details-link"></a><br>
+                        <span th:text="${'Downloaded: ' + app.downloadCount}"></span>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </main>
+    </section>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="/fragments/layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title>Application Details</title>
+</head>
+
+<body>
+
+    <section class="row">
+        <main class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row text-center mt-3"><h3 th:text="${app.name}"></h3></div>
+                    <div class="row app-details-image"><img
+                            th:src="${app.pictureSmall} == null ? _ : @{'data:image/jpg;base64,'+${app.pictureBig}}">
+                    </div>
+                    <div class="row w-50 mx-auto mt-3 mb-3" sec:authorize="isAuthenticated()"><a
+                            th:href="@{|/download/${app.id}|}" th:text="Download"
+                            class="btn btn-primary btn-lg"></a>
+                    </div>
+                    <div class="row w-50 mx-auto mt-3 mb-3" sec:authorize="!isAuthenticated()"><a
+                            th:href="@{|/download/${app.id}|}" th:text="Download"
+                            class="btn btn-primary btn-lg disabled"></a>
+                        <span class="text-center">(Login is required)</span>
+                    </div>
+                    <div class="alert alert-danger text-center" role="alert" th:if="${message}">
+                        <span th:text="${message}"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 app-details-desc">
+                    <p th:text="${app.description}"></p>
+                    <p th:text="|Rating: ${app.rating} (number of ratings: ${app.noOfRatings})|"></p>
+                    <form th:action="@{/apprating}" th:object="${rating}" method="post" class="input-group"
+                          sec:authorize="isAuthenticated()">
+                        <input id="rating" type="text" name="rating" th:field="*{rating}"
+                               th:type="number" th:min="1" th:max="5" class="rating-input">
+                        <input id="appId" type="hidden" name="appId" size="1" th:field="*{appId}">
+                        <input id="submit" type="submit" value="Rate" class="btn btn-success">
+                    </form>
+                </div>
+            </div>
+        </main>
+    </section>
+
+</body>
+</html>
